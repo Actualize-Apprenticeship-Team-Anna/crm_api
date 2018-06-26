@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'leads#index'
 
   devise_for :admins
+  # devise_for :admins, skip: :sessions
 
   resources :leads
   get '/next' => 'leads#next'
