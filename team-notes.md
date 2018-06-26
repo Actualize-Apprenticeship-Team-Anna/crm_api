@@ -1,1 +1,1 @@
-- commented out line 5 in devise gem root folder, it was in the SesssionsController. 
+- commented out line 5 in devise gem root folder, it was in the SesssionsController. (wb-sk 6/25/18).
