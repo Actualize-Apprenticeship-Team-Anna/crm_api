@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       $.get('/api/v1/leads.json').success(function(response) {
         console.log(this);
         this.leads = response;
+        console.log(this.leads);
       }.bind(this));
     },
     methods: {
