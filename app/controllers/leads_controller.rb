@@ -36,6 +36,8 @@ class LeadsController < ApplicationController
 
   def edit
     @lead = Lead.find_by(id: params[:id])
+    new_outreach = Outreach.new(lead_id: params[:id])
+    # @new_outreach_description = ''
 
     # We grab the entire text history from the Twilio API
     client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
