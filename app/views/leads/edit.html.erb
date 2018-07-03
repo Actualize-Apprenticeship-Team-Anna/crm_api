@@ -33,6 +33,10 @@
               <button id="button-hangup" class="btn btn-danger">Hangup</button>
             </div>
             <div id="log"></div>
+            <div>
+              <h2>Auto-Text</h2>
+              <button id="button-auto-text" class="btn btn-info">Send Auto-Text</button>
+            </div>
             <div class="card-header d-flex align-items-center">
               <h2 class="h5 display">Send Custom Text Message</h2>
             </div>
@@ -165,6 +169,11 @@
   document.getElementById('button-hangup').onclick = function () {
     // log('Hanging up...');
     Twilio.Device.disconnectAll();
+  };
+
+  // Bind button to send Auto-Text
+  document.getElementById('button-auto-text').onclick = function () {
+    console.log('sending auto text!!');
   };
 
 });
