@@ -43,12 +43,12 @@
             <%= form_tag "/text", {class: "form-horizontal text-form"} do %>
             <div class="form-group row">
               <div class="col-sm-10">
-                <%= text_field_tag :phone, @lead.phone, {class: "form-control form-control-warning"} %>
+                <%= hidden_field_tag :phone, @lead.phone, {class: "form-control form-control-warning"} %>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-10">
-                <%= text_area_tag :body, "Hi, FIRST NAME! This is Rena from the Actualize coding bootcamp. Do you have a minute to talk?", {class: "form-control form-control-warning"} %>
+                <%= hidden_field_tag :body, "Hi, #{@lead.first_name.partition(" ").first}! This is Rena from the Actualize coding bootcamp. Do you have a minute to talk?", {class: "form-control form-control-warning"} %>
               </div>
             </div>
             <div class="form-group row">
