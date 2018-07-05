@@ -107,8 +107,10 @@ class LeadsController < ApplicationController
       to: params[:phone],
       body: params[:body]
     )
+    flash[:success] = "Auto text sent!"
+    redirect_to :back
 
-    render nothing: true
+    # render nothing: true
   end
 
   def no_leads
