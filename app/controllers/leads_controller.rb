@@ -38,21 +38,28 @@ class LeadsController < ApplicationController
     @lead = Lead.find_by(id: params[:id])
 
     # We grab the entire text history from the Twilio API
-    client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
-    messages_from_lead = client.account.messages.list({
-                  :to   => ENV['TWILIO_PHONE_NUMBER'], 
-                  :from => @lead.phone
-    })
-    messages_from_call_converter = client.account.messages.list({
-                  :to   => @lead.phone,
-                  :from => ENV['TWILIO_PHONE_NUMBER']
-    })
-    @messages = (messages_from_lead + messages_from_call_converter).sort_by {|m| m.date_sent}
+    # client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+    # # # messages_from_lead = client.account.messages.list({
+    # #               :to   => ENV['TWILIO_PHONE_NUMBER'], 
+    # #               :from => @lead.phone
+    # # })
+    # messages_from_call_converter = client.account.messages.list({
+    #               :to   => @lead.phone,
+    #               :from => ENV['TWILIO_PHONE_NUMBER']
+    # })
+    # @messages = (messages_from_lead + messages_from_call_converter).sort_by {|m| m.date_sent}
   end
 
   def update
     @lead = Lead.find_by(id: params[:id])
-    if @lead.update(lead_params)    
+    if @lead.update(lead_params) 
+      if lead_params[:latest_outreach] != ""
+        @outreach = Outreach.new(
+          lead_id: @lead.id,
+          description: lead_params[:latest_outreach]
+        )
+        @outreach.save
+      end
       flash[:success] = "Lead saved!"
       redirect_to '/'
     else
@@ -107,8 +114,8 @@ class LeadsController < ApplicationController
       to: params[:phone],
       body: params[:body]
     )
-
-    render nothing: true
+    flash[:success] = "Auto text sent!"
+    redirect_to :back
   end
 
   def no_leads
@@ -117,6 +124,6 @@ class LeadsController < ApplicationController
   private
 
   def lead_params
-    params.require(:lead).permit(:first_name, :last_name, :email, :phone, :city, :state, :zip, :contacted, :appointment_date, :notes, :connected, :bad_number, :advisor, :location, :first_appointment_set, :first_appointment_actual, :first_appointment_format, :second_appointment_set, :second_appointment_actual, :second_appointment_format, :enrolled_date, :deposit_date, :sales, :collected, :status, :next_step, :rep_notes, :exclude_from_calling, :meeting_type, :meeting_format)
+    params.require(:lead).permit(:first_name, :last_name, :email, :phone, :city, :state, :zip, :contacted, :appointment_date, :notes, :connected, :bad_number, :advisor, :location, :first_appointment_set, :first_appointment_actual, :first_appointment_format, :second_appointment_set, :second_appointment_actual, :second_appointment_format, :enrolled_date, :deposit_date, :sales, :collected, :status, :next_step, :rep_notes, :exclude_from_calling, :meeting_type, :meeting_format, :latest_outreach)
   end
 end
