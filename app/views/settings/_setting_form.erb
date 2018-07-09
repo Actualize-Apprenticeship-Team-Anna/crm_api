@@ -1,0 +1,24 @@
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <%= form_for @setting do |f| %>
+        <div class="card-header d-flex align-items-center">
+          <h2 class="h5 display">Settings</h2>
+        </div>
+        <div class="update-lead-form">
+          <div class="form-group">
+            <%= f.label :auto_text %>
+            <%= f.text_field :auto_text, class: "form-control form-control-warning" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6" id="update-btn-col">
+    <%= f.submit class: 'btn btn-primary btn-lg update-btn' %>
+  </div>
+</div>
+<% end %>
