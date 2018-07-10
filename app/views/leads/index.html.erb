@@ -5,12 +5,13 @@
         <h1 class="h3">All Leads</h1>
       </header>
       <div class="row">
-        <%= form_tag('/leads', method: :get) do %>
-          <%= text_field_tag :search %>
-          <%= submit_tag "Search" %>
-        <% end %>
 
-      </div>
+       <input v-model="searchFirstName" placeholder="Search by FirstName" type="text">
+
+      <input v-model="searchLastName" placeholder="Search by LastName" type="text">
+      <input v-model="searchEmail" placeholder="Search by Email" type="text">
+        
+     </div>
 
       <div class="row">
         <div class="table-responsive leads-table">
@@ -29,7 +30,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="lead in leads">
+              <tr v-for="lead in leads" v-if="isValidLead(lead.first_name, lead.last_name, lead.email)" v-bind:key="lead.id">
                 <td>{{ moment(lead.created_at).format('dddd MMM Do YYYY, h:mm a') }}</td>
                 <td>{{ lead.first_name }}</td>
                 <td>{{ lead.last_name }}</td>
