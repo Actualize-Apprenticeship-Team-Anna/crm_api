@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
       leads: [],
       time_format: "12/25/17",
       url: "https://www.google.com/", 
-      searchFirstName: "",
-      searchLastName: "",
-      searchEmail: ""
+      searchTerm: ""
+      // searchFirstName: "",
+      // searchLastName: "",
+      // searchEmail: ""
 
     },
     mounted: function() {
@@ -21,15 +22,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
       moment: function(date) {
         return moment(date);
       },
-    isValidLead: function(FirstName, LastName, Email){
-      console.log("hello");
-      var validFirstName = FirstName.toLowerCase().includes(this.searchFirstName.toLowerCase());
-
-      var validLastName = LastName.toLowerCase().includes(this.searchLastName.toLowerCase());
-
-      var validEmail = Email.toLowerCase().includes(this.searchEmail.toLowerCase());
-      return validFirstName && validLastName && validEmail;
-     }  
+      isValidLead: function(FirstName, LastName, Email) {
+        var validFirstName = FirstName.toLowerCase().includes(this.searchTerm.toLowerCase());
+        var validLastName = LastName.toLowerCase().includes(this.searchTerm.toLowerCase());
+        var validEmail = Email.toLowerCase().includes(this.searchTerm.toLowerCase());
+        return validFirstName || validLastName || validEmail;
+      }  
     },
     computed: {
 
