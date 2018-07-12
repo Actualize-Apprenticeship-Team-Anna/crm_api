@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
       time_format: "12/25/17",
       url: "https://www.google.com/", 
       searchTerm: ""
-      // searchFirstName: "",
-      // searchLastName: "",
-      // searchEmail: ""
-
     },
     mounted: function() {
       $.get('/api/v1/leads.json').success(function(response) {
