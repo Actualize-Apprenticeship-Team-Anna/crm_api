@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       leads: [],
       time_format: "12/25/17",
       url: "https://www.google.com/", 
-      searchTerm: ""
+      searchTerm: "",
+      sort: ""
     },
     mounted: function() {
       $.get('/api/v1/leads.json').success(function(response) {
@@ -26,6 +27,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
         } else {
           eventsContainer.style.display = "none";
         }
+      },
+
+      onClickHeader: function(attribute) {
+        if (this.sort === attribute) {
+          this.leads.reverse();
+        } else {
+          this.leads.sort(function(lead1,lead2) {
+            return (lead1[attribute] > lead2[attribute]) ? 1 : ((lead2[attribute] > lead1[attribute]) ? -1 : 0);
+          } ); 
+
+        }
+        this.sort = attribute;
       },
       isValidLead: function(FirstName, LastName, Email) {
         var validFirstName = FirstName.toLowerCase().includes(this.searchTerm.toLowerCase());

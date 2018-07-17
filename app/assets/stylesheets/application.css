@@ -25,6 +25,9 @@
 .leads-table {
   margin-top: 20px;
 }
+  .table th {
+      cursor:pointer;
+    }
 
 .leads-table tr {
   background-color: #fff;

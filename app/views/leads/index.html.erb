@@ -14,11 +14,10 @@
             <thead>
               <tr>
                 <th>Created</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
+                <th v-on:click="onClickHeader('first_name')">First Name</th>
+                <th v-on:click="onClickHeader('last_name')">Last Name</th>
+                <th v-on:click="onClickHeader('email')">Email</th>
                 <th>Phone</th>
-                <!-- <th>Hot?</th> -->
                 <th>Appointment Date</th>
                 <th>Call Converter Notes</th>
                 <!-- <th>Processed Within</th> -->
