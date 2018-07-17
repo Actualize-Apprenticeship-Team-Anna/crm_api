@@ -41,7 +41,7 @@
                 <td>{{ lead.notes }}</td>
                 <!-- <td>{{ lead.processed_within_minutes }}</td> -->
               
-               <div v-bind:id="lead.id" style="display:none"> 
+               <div v-bind:id="lead.id" style="display:none" class="events-row"> 
                     
                         <span v-for="event in lead.events"> {{ event.name }}
                         </span>

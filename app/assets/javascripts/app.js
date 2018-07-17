@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       onClickLead: function(lead) {
         var eventsContainer = document.getElementById(lead.id);
         if (eventsContainer.style.display === "none") {
-          eventsContainer.style.display = "block";
+          eventsContainer.style.display = "flex";
         } else {
           eventsContainer.style.display = "none";
         }
