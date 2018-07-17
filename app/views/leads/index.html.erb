@@ -25,7 +25,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="lead in leads" v-if="isValidLead(lead.first_name, lead.last_name, lead.email)" v-bind:key="lead.id">
+
+              <template v-for="lead in leads" v-if="isValidLead(lead.first_name, lead.last_name, lead.email)" v-bind:key="lead.id">
+              <tr v-on:click="onClickLead(lead)">
+
                 <td>{{ moment(lead.created_at).format('dddd MMM Do YYYY, h:mm a') }}</td>
                 <td>{{ lead.first_name }}</td>
                 <td>{{ lead.last_name }}</td>
@@ -35,6 +38,21 @@
                 <td>{{ moment(lead.appointment_date).format('dddd MMM Do YYYY, h:mm a') }}</td>
                 <td>{{ lead.notes }}</td>
                 <!-- <td>{{ lead.processed_within_minutes }}</td> -->
+              
+               <div v-bind:id="lead.id" style="display:none" class="events-row"> 
+                    
+                        <span v-for="event in lead.events"> {{ event.name }}
+                        </span>
+                      
+                        <a href="#" class="btn btn-default btn-sm">
+                  </a>
+                </div>
+              </tr>
+            </template>
+                        
+                     
+                    
+                      </tbody>
               </tr>
             </tbody>
           </table>

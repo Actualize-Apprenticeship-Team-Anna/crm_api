@@ -30,6 +30,10 @@
   background-color: #fff;
 }
 
+.events-row {
+    flex-direction: column;
+  }
+
 .text-bubble {
   width: 85%;
 }

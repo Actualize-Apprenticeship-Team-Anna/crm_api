@@ -18,12 +18,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
       moment: function(date) {
         return moment(date);
       },
+
+      onClickLead: function(lead) {
+        var eventsContainer = document.getElementById(lead.id);
+        if (eventsContainer.style.display === "none") {
+          eventsContainer.style.display = "flex";
+        } else {
+          eventsContainer.style.display = "none";
+        }
+      },
       isValidLead: function(FirstName, LastName, Email) {
         var validFirstName = FirstName.toLowerCase().includes(this.searchTerm.toLowerCase());
         var validLastName = LastName.toLowerCase().includes(this.searchTerm.toLowerCase());
         var validEmail = Email.toLowerCase().includes(this.searchTerm.toLowerCase());
         return validFirstName || validLastName || validEmail;
       }  
+
     },
     computed: {
 
