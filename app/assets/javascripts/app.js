@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
             lead.events = sortedEvents;
           }
         });
+        // this.leads = this.leads.sort((a, b) => a.events[0].updated_at > b.events[0].updated_at);
+        this.leads = this.leads.sort(function(a, b) {
+          if (a.events[0] && b.events[0]) {
+            return b.events[0].updated_at - a.events[0].updated_at;
+          }
+        });
       }.bind(this));
     },
     methods: {
