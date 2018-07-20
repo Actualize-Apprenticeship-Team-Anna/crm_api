@@ -25,7 +25,6 @@
               </tr>
             </thead>
             <tbody>
-
               <template v-for="lead in leads" v-if="isValidLead(lead.first_name, lead.last_name, lead.email)" v-bind:key="lead.id">
               <tr v-on:click="onClickLead(lead)">
 
@@ -42,6 +41,7 @@
                <div v-bind:id="lead.id" style="display:none" class="events-row"> 
                     
                         <span v-for="event in lead.events"> {{ event.name }}
+                          {{ moment(event.updated_at).format('MM/DD') }}
                         </span>
                       
                         <a href="#" class="btn btn-default btn-sm">

@@ -32,6 +32,7 @@
 
 .events-row {
     flex-direction: column;
+    width: 150px;
   }
 
 .text-bubble {

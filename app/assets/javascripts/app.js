@@ -10,8 +10,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       $.get('/api/v1/leads.json').success(function(response) {
-        console.log(this);
         this.leads = response;
+        this.leads.map(function(lead) { 
+          if (lead.events) {
+            var sortedEvents = lead.events.sort((a, b) => b.updated_at > a.updated_at);
+            lead.events = sortedEvents;
+          }
+        });
+        // this.leads = this.leads.sort((a, b) => a.events[0].updated_at > b.events[0].updated_at);
+        this.leads = this.leads.sort(function(a, b) {
+          if (a.events[0] && b.events[0]) {
+            return b.events[0].updated_at - a.events[0].updated_at;
+          }
+        });
       }.bind(this));
     },
     methods: {
