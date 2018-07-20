@@ -10,8 +10,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     mounted: function() {
       $.get('/api/v1/leads.json').success(function(response) {
-        console.log(this);
         this.leads = response;
+        this.leads.map(function(lead) { 
+          if (lead.events) {
+            var sortedEvents = lead.events.sort((a, b) => b.updated_at > a.updated_at);
+            lead.events = sortedEvents;
+          }
+        });
       }.bind(this));
     },
     methods: {
