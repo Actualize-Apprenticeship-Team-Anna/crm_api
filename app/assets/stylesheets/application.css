@@ -30,6 +30,10 @@
   background-color: #fff;
 }
 
+.leads-table tr.orange-lead {
+  background-color: #f7c204 !important;
+}
+
 .events-row {
     flex-direction: column;
   }
