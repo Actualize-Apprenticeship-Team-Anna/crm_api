@@ -53,4 +53,14 @@ class Lead < ApplicationRecord
     # We tried dialing a valid number but the lead didn't answer their phone:
     self.contacted && !self.bad_number && !self.connected
   end
+
+  def latest_event
+    # event = self.events[0]
+    # self.events.each do |e|
+    #   if e < event 
+    #     event = e
+    #   end
+    # end
+    return self.last_name
+  end
 end

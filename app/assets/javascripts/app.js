@@ -6,12 +6,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
       leads: [],
       time_format: "12/25/17",
       url: "https://www.google.com/", 
-      searchTerm: ""
+      searchTerm: "",
+      count: 0
     },
     mounted: function() {
       $.get('/api/v1/leads.json').success(function(response) {
-        console.log(this);
+        var count = 0;
         this.leads = response;
+        this.leads.map(function(lead) { 
+          count = count + 1;
+          if (lead.events) {
+            var sortedEvents = lead.events.sort((a, b) => b.updated_at > a.updated_at);
+            lead.events = sortedEvents;
+          }
+        });
+        this.leads = _.orderBy(this.leads, function(lead) {
+          if (lead.events[0] != undefined) {
+            return lead.events[0].updated_at;
+          }
+        }).reverse();
+        this.leads.push(_.remove(this.leads, function(el) { 
+          return el.events.length === 0;
+        }));
+        this.leads = [].concat.apply([], this.leads);
       }.bind(this));
     },
     methods: {
