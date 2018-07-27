@@ -15,42 +15,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         this.leads = response;
         this.leads.map(function(lead) { 
           count = count + 1;
-          // console.log(lead);
           if (lead.events) {
             var sortedEvents = lead.events.sort((a, b) => b.updated_at > a.updated_at);
             lead.events = sortedEvents;
           }
         });
-        if (count === this.leads.length) {
-          // console.log("inside if");
-          function compare(a,b) {
-            var lead1 = new Date(a.events && a.events[0] && a.events[0].updated_at || a.events && a.events[0] && a.events[0].created_at);
-            var lead2 = new Date(b.events && b.events[0] && b.events[0].updated_at || b.events && b.events[0] && b.events[0].created_at);
-            // console.log("lead1", lead1);
-            // console.log("lead2", lead2);
-            if (lead1 < lead2) {
-              // console.log("a.events[0].updated_at", a.events[0].updated_at);
-              // console.log("b.events[0].updated_at", b.events[0].updated_at);
-              return -1;
-            }
-            if (lead1 > lead2) {
-              // console.log(2);
-              return 1;
-            }
-            // console.log(3);
-            return 0;
+        this.leads = _.orderBy(this.leads, function(lead) {
+          if (lead.events[0] != undefined) {
+            return lead.events[0].updated_at;
           }
-          // console.log(this.leads);
-          this.leads.sort(compare);
-          this.leads.reverse();
-        }
-        // this.leads = this.leads.sort((a, b) => a.events[0].updated_at > b.events[0].updated_at);
-        // this.leads = this.leads.sort(function(a, b) {
-        //   if (a.events[0] && b.events[0]) {
-        //     console.log("inside if statement");
-        //     return b.events[0].updated_at - a.events[0].updated_at;
-        //   }
-        // });
+        }).reverse();
+        this.leads.push(_.remove(this.leads, function(el) { 
+          return el.events.length === 0;
+        }));
+        this.leads = [].concat.apply([], this.leads);
       }.bind(this));
     },
     methods: {
