@@ -25,7 +25,7 @@
             </thead>
             <tbody>
               <template v-for="lead in leads" v-if="isValidLead(lead.first_name, lead.last_name, lead.email)" v-bind:key="lead.id">
-              <tr v-on:click="onClickLead(lead)" v-bind:class="{'orange-lead':!lead.outreaches || lead.outreaches.length == 0}">
+              <tr v-on:click="onClickLead(lead)" v-bind:class="{'orange-lead':!lead.outreaches || lead.outreaches.length == 0, 'blue-lead': lead.hot}">
 
                 <td>{{ moment(lead.created_at).format('dddd MMM Do YYYY, h:mm a') }}</td>
                 <td>{{ lead.first_name }}</td>

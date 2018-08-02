@@ -37,6 +37,9 @@
   background-color: #f7c204 !important;
 }
 
+.leads-table tr.blue-lead {
+  background-color: #0cc6f4 !important;
+}
 .events-row {
     flex-direction: column;
     width: 150px;

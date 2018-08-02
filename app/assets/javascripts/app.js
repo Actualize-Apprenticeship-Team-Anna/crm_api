@@ -16,12 +16,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var count = 0;
         this.leads = response;
         this.leads.map(function(lead) { 
+          lead.hot = false;
           count = count + 1;
           if (lead.events) {
             var sortedEvents = lead.events.sort((a, b) => b.updated_at > a.updated_at);
             lead.events = sortedEvents;
           }
+          
+          if (lead.outreaches && lead.outreaches.length > 0)  {
+           
+            lead.outreaches.sort(function(a,b) { 
+                var dateA = a.updated_at ? a.updated_at : a.created_at;
+                var dateB = b.updated_at ? b.updated_at : b.created_at;
+                return dateA < dateB ? 1 : dateB < dateA ? -1 : 0;
+            }
+
+              );
+             var latestOutreach = lead.outreaches[0].updated_at ? lead.outreaches[0].updated_at : lead.outreaches[0].created_at;
+            if (latestOutreach < lead.events[0].updated_at) {
+               lead.hot = true;
+            }
+
+          }
         });
+
+          
         this.leads = _.orderBy(this.leads, function(lead) {
           if (lead.events[0] != undefined) {
             return lead.events[0].updated_at;
